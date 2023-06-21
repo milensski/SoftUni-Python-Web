@@ -6,6 +6,11 @@ __pycache__/
 # C extensions
 *.so
 
+#Folders
+postgresql/
+pgadmin4/
+
+
 # Distribution / packaging
 .Python
 build/
