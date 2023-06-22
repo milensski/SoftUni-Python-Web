@@ -26,6 +26,28 @@ class ProfileCreateForm(forms.ModelForm):
         }
 
 
+class ProfileDeleteForm(ProfileCreateForm):
+
+    class Meta:
+        model = Profile
+        fields = ()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        if commit:
+            Album.objects \
+                .all() \
+                .delete()
+            self.instance.delete()
+
+        return self.instance
+
+    def __set_hidden_fields(self):
+        for _, field in self.fields.items():
+            field.widget = forms.HiddenInput()
+
+
 class AlbumCreateForm(forms.ModelForm):
     class Meta:
         model = Album
@@ -39,6 +61,11 @@ class AlbumCreateForm(forms.ModelForm):
             'artist': forms.TextInput(
                 attrs={
                     'placeholder': 'Artist',
+                }
+            ),
+            'genre': forms.Select(
+                attrs={
+                    'placeholder': 'Genre',
                 }
             ),
             'description': forms.Textarea(
@@ -57,3 +84,20 @@ class AlbumCreateForm(forms.ModelForm):
                 }
             ),
         }
+
+
+class AlbumDeleteForm(AlbumCreateForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.__set_disabled_fields()
+
+    def save(self, commit=True):
+        if commit:
+            self.instance.delete()
+
+        return self.instance
+
+    def __set_disabled_fields(self):
+        for _, field in self.fields.items():
+            field.widget.attrs['readonly'] = 'readonly'

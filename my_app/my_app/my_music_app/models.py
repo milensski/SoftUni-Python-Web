@@ -25,24 +25,7 @@ class Profile(models.Model):
 class ChoicesEnum(Enum):
     @classmethod
     def choices(cls):
-        return [(x.name, x.value) for x in cls]
-
-
-class AlbumGenres(ChoicesEnum):
-    POP = 'Pop Music'
-    JAZZ = "Jazz Music"
-    RNB = "R&B Music"
-    ROCK = "Rock Music"
-    COUNTRY = "Country Music"
-    DANCE = "Dance Music"
-    HIP_HOP = "Hip Hop Music"
-    OTHER = "Other"
-
-
-class ChoicesEnum(Enum):
-    @classmethod
-    def choices(cls):
-        return [(x.name, x.value) for x in cls]
+        return [(x.value, x.value) for x in cls]
 
 
 class AlbumGenres(ChoicesEnum):
