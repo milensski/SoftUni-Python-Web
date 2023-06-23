@@ -98,7 +98,6 @@ def delete_album(request, pk):
 
 
 def add_profile(request):
-
     if request.method == 'GET':
         form = ProfileCreateForm()
     else:
@@ -146,3 +145,12 @@ def profile_delete(request):
     }
 
     return render(request, 'profile/profile-delete.html', context)
+
+
+def about(request):
+
+    context = {
+        'hide_nav_links': True
+    }
+
+    return render(request, 'about.html', context)

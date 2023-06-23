@@ -1,7 +1,7 @@
 from django.urls import path, include
 
 from my_app.my_music_app.views import index, add_album, details_album, edit_album, delete_album, profile_details, \
-    profile_delete
+    profile_delete, about
 
 """
 
@@ -22,7 +22,8 @@ urlpatterns = (
     path('profile/', include([
         path('details/', profile_details, name='profile details'),
         path('delete/', profile_delete, name='profile delete')
-    ]))
+    ])),
+    path('about/', about, name='about'),
 
 
 )
